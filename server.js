@@ -16,8 +16,8 @@ const app = express();
 app.use(cors());
 app.use('/hls', express.static(outputDir));
 
-const server = app.listen(8081, () => {
-  console.log("HTTP server is listening on port 8081");
+const server = app.listen(8082, () => {
+  console.log("HTTP server is listening on port 8082");
 });
 
 const wss = new WebSocket.Server({ server });
@@ -38,9 +38,7 @@ const startFFmpeg = () => {
     "-c:a", "aac",
     "-b:a", "128k",
     "-f", "hls",
-    "-hls_time", "4",
-    "-hls_list_size", "5",
-    "-hls_flags", "delete_segments",
+    "-hls_time", "6",
     "-hls_segment_filename", path.join(outputDir, `${streamKey}_%03d.ts`),
     playlist,
   ]);
